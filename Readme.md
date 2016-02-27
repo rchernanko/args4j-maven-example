@@ -1,3 +1,7 @@
+#Introduction
+
+This is me messing around with args4j library. This allows you to parse commands via the command line.
+
 ###WIP
 
 At the time of writing - in order to parse the arguments, I need to first:
