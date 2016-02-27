@@ -36,9 +36,9 @@ Business-Logic
 
 ###Websites I've used so far:
 
-http://args4j.kohsuke.org/sample.html
-http://www.vineetmanohar.com/2009/11/3-ways-to-run-java-main-from-maven/
-http://stackoverflow.com/questions/1200054/java-library-for-parsing-command-line-parameters
-http://www.mojohaus.org/exec-maven-plugin/usage.html
-https://redstack.wordpress.com/2010/12/22/configuring-maven-to-run-your-java-application/
-http://stackoverflow.com/questions/5396749/pass-command-line-params-in-mvn-execexec
+- http://args4j.kohsuke.org/sample.html
+- http://www.vineetmanohar.com/2009/11/3-ways-to-run-java-main-from-maven/
+- http://stackoverflow.com/questions/1200054/java-library-for-parsing-command-line-parameters
+- http://www.mojohaus.org/exec-maven-plugin/usage.html
+- https://redstack.wordpress.com/2010/12/22/configuring-maven-to-run-your-java-application/
+- http://stackoverflow.com/questions/5396749/pass-command-line-params-in-mvn-execexec
