@@ -33,6 +33,24 @@ The maven build was a success but 'name' was assigned both parsed arguments:
 
 ###With the exec-maven-plugin in the pom.xml (but without the executions section)
 
+           <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <mainClass>com.richard.Main</mainClass>
+                    <arguments>
+                        <argument>-name</argument>
+                        <argument>${name}</argument>
+                        <argument>-age</argument>
+                        <argument>${age}</argument>
+                    </arguments>
+                    <!--Instead of arguments, I could've also used the commandLineArgs option too - see below-->
+                    <!--But args is a little nicer to read-->
+                    <!--<commandlineArgs>-name ${name} -age ${age}</commandlineArgs>-->
+                </configuration>
+            </plugin>
+            
 1) Run:
 
 ```sh
@@ -67,7 +85,7 @@ So I've now added the compiler plugin in the pom.xml:
             </plugin>
            
 This plugin runs during maven's compile phase and compiles both the main source files AND the test source files.
-I don't need to put in any <executions> within this plugin because by default, it will run as part of the compile phase 
+I don't need to put in any execution information within this plugin because by default, it will run as part of the compile phase 
 
 See below for more detail:
 https://maven.apache.org/plugins/maven-compiler-plugin/usage.html)
