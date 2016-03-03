@@ -11,14 +11,13 @@ public class Richard {
 
     public void run() {
 
-        System.out.println("Business-Logic");
         System.out.println("- name: " + name);
         System.out.println("- age: " + age);
 
-        if (name.equals("richard")) {
-            System.out.println("RICHARD IS THE KING!");
-        } else if (name.equals("anne")) {
-            System.out.println("ANNE IS THE QUEEN");
+        if (name.equalsIgnoreCase("richard")) {
+            System.out.println("Hello Richard!");
+        } else if (name.equalsIgnoreCase("anne")) {
+            System.out.println("Hello Anne");
         }
     }
 
