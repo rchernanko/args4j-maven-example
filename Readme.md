@@ -155,6 +155,15 @@ as to what is best.
 2) Start looking at the maven surefire and maven failsafe plugins - what is the difference between these and the exec one...?
 When should i use one and not the other? What is a tester more likely to use?
 
+Do i actually need to use the exec plugin at all (to run tests?). THINK ABOUT IT - the shopping test framework DOESN'T
+use the exec-plugin (but then again it doesn't have a main method...)....mmmmmm...it uses the failsafe-plugin...
+need to read up about this...
+
+Beccy's repo ONLY uses the exec plugin and that DOESN'T have a main method. Instead it uses @Test annotation:
+
+https://github.com/DigitalInnovation/data_checker
+But then again, i think I could run that with just a mvn clean install (i.e. i don't think it needs the exec-plugin)
+
 Interesting...look at the ordering of the maven plugins during my mvn clean install above...
 
 I have added the maven-compiler-plugin in my pom.xml because if i don't, the source and target = 1.5
