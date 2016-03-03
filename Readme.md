@@ -4,13 +4,21 @@ This is me messing around with args4j library. This allows you to parse commands
 
 ###This is WIP:
 
-At the time of writing - in order to parse the arguments, I need to first:
+###Without the exec-maven-plugin
 
-1) Run a mvn compile
+Prior to me adding the 'exec-maven-plugin' in the pom.xml file, in order to parse the arguments, I needed to first:
 
-2) On the command line, I can then do this...
+1) Run: 
 
-mvn exec:java -Dexec.mainClass="com.richard.Main" -Dexec.arguments=-name=richard,-age=12
+```sh
+$ mvn compile
+```
+
+2) On the command line, I then did this...
+
+```sh
+$ mvn exec:java -Dexec.mainnamClass="com.richard.Main" -Dexec.arguments=-name=richard,-age=12
+```
 
 NOTE:
 
@@ -18,16 +26,30 @@ mvn exec:java -Dexec.mainClass="com.richard.Main" -Dexec.args=-name=richard,-age
 
 The maven build was a success but 'name' was assigned both parsed arguments:
 
+> name: richard,-age=12
+> age: null
 
-"
-- name: richard,-age=12
-- age: null
-"
+###With the exec-maven-plugin
 
+1) Run:
+
+```sh
+$ mvn compile
+```
+
+2) On the command line, I can then do...
+
+```sh
+$ mvn exec:java -Dname=roger -Dage=43
+```
+
+...and the following is printed
+
+> name: roger
+> age: 54
+> Unknown name
 
 ###Next Steps:
-
-1) Install the maven exec plugin and get it working this way
 
 2) Get to a stage where i can just do a 'mvn clean install -Dname=richard -Dage=12' on the command line
 

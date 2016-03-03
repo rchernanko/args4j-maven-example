@@ -8,6 +8,28 @@
     <artifactId>args4j-maven-example</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <mainClass>com.richard.Main</mainClass>
+                    <arguments>
+                        <argument>-name</argument>
+                        <argument>${name}</argument>
+                        <argument>-age</argument>
+                        <argument>${age}</argument>
+                    </arguments>
+                    <!--Instead of arguments, I could've also used the commandLineArgs option too - see below-->
+                    <!--But args is a little nicer to read-->
+                    <!--<commandlineArgs>-name ${name} -age ${age}</commandlineArgs>-->
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>args4j</groupId>

@@ -37,6 +37,8 @@ public class Main {
             System.out.println("Hello Richard!");
         } else if (name.equalsIgnoreCase("anne")) {
             System.out.println("Hello Anne");
+        } else {
+            System.out.println("Unknown name");
         }
     }
 }
