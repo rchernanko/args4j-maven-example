@@ -88,7 +88,7 @@ This plugin runs during maven's compile phase and compiles both the main source 
 I don't need to put in any execution information within this plugin because by default, it will run as part of the compile phase 
 
 See below for more detail:
-https://maven.apache.org/plugins/maven-compiler-plugin/usage.html)
+https://maven.apache.org/plugins/maven-compiler-plugin/usage.html
 
 
 ###With the exec-maven-plugin in the pom.xml (including the executions section)
@@ -148,9 +148,10 @@ I can see that the maven compiler plugin is now being run:
 I'm a little unsure as to the whether the phase/execution goal of the maven-exec-plugin is correct. I'm a little unsure
 as to what is best. 
 
-So NEXT STEPS:
+###So NEXT STEPS:
  
 1) Figure out whether the exec-plugin actually NEEDS me to specify a phase...
+
 2) Start looking at the maven surefire and maven failsafe plugins - what is the difference between these and the exec one...?
 When should i use one and not the other? What is a tester more likely to use?
 
