@@ -10,17 +10,16 @@ At the time of writing - in order to parse the arguments, I need to first:
 
 2) On the command line, I can then do this...
 
-mvn exec:java -Dexec.mainClass="com.richard.Test" -Dexec.arguments=-name=richard,-age=12
+mvn exec:java -Dexec.mainClass="com.richard.Main" -Dexec.arguments=-name=richard,-age=12
 
 NOTE:
 
-mvn exec:java -Dexec.mainClass="com.richard.Test" -Dexec.args=-name=richard,-age=12 DID NOT WORK. 
+mvn exec:java -Dexec.mainClass="com.richard.Main" -Dexec.args=-name=richard,-age=12 DID NOT WORK. 
 
 The maven build was a success but 'name' was assigned both parsed arguments:
 
 
 "
-Business-Logic
 - name: richard,-age=12
 - age: null
 "
