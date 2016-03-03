@@ -2,9 +2,11 @@
 
 This is me messing around with args4j library. This allows you to parse commands via the command line.
 
+This messing around also includes delving into the world of maven plugins.
+
 ###This is WIP:
 
-###Without the exec-maven-plugin
+###Without the exec-maven-plugin in the pom.xml
 
 Prior to me adding the 'exec-maven-plugin' in the pom.xml file, in order to parse the arguments, I needed to first:
 
@@ -17,10 +19,10 @@ $ mvn compile
 2) On the command line, I then did this...
 
 ```sh
-$ mvn exec:java -Dexec.mainnamClass="com.richard.Main" -Dexec.arguments=-name=richard,-age=12
+$ mvn exec:java -Dexec.mainClass="com.richard.Main" -Dexec.arguments=-name=richard,-age=12
 ```
 
-NOTE:
+**NOTE:**
 
 mvn exec:java -Dexec.mainClass="com.richard.Main" -Dexec.args=-name=richard,-age=12 DID NOT WORK. 
 
@@ -29,7 +31,7 @@ The maven build was a success but 'name' was assigned both parsed arguments:
 > name: richard,-age=12
 > age: null
 
-###With the exec-maven-plugin
+###With the exec-maven-plugin in the pom.xml (but without the executions section)
 
 1) Run:
 
@@ -49,9 +51,98 @@ $ mvn exec:java -Dname=roger -Dage=43
 > age: 54
 > Unknown name
 
-###Next Steps:
 
-2) Get to a stage where i can just do a 'mvn clean install -Dname=richard -Dage=12' on the command line
+###With the mvn-compiler-plugin in the pom.xml
+
+So I've now added the compiler plugin in the pom.xml:
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+           
+This plugin runs during maven's compile phase and compiles both the main source files AND the test source files.
+I don't need to put in any <executions> within this plugin because by default, it will run as part of the compile phase 
+
+See below for more detail:
+https://maven.apache.org/plugins/maven-compiler-plugin/usage.html)
+
+
+###With the exec-maven-plugin in the pom.xml (including the executions section)
+
+So my exec-maven-plugin now looks like this:
+
+           <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.richard.Main</mainClass>
+                    <arguments>
+                        <argument>-name</argument>
+                        <argument>${name}</argument>
+                        <argument>-age</argument>
+                        <argument>${age}</argument>
+                    </arguments>
+                    <!--Instead of arguments, I could've also used the commandLineArgs option too - see below-->
+                    <!--But args is a little nicer to read-->
+                    <!--<commandlineArgs>-name ${name} -age ${age}</commandlineArgs>-->
+                </configuration>
+            </plugin>
+
+To clarify, the maven-compiler plugin AND maven-exec-plugin are now installed. So now, I can actually run a:
+
+```sh
+$ mvn clean install -Dname=frank -Dage=23
+```
+
+...and this will work! 
+
+I can see that the maven compiler plugin is now being run:
+
+![Maven compiler plugin running Snippet](readme_images/maven_compiler_plugin.png)
+
+...and I can see that the exec plugin is also being run:
+
+![Maven exec plugin running Snippet](readme_images/maven_exec_plugin.png)
+
+...and the build is marked as a success!
+
+![Build success Snippet](readme_images/success.png)
+
+
+**HOWEVER** I don't quite understand the maven lifecycle well enough...
+
+I'm a little unsure as to the whether the phase/execution goal of the maven-exec-plugin is correct. I'm a little unsure
+as to what is best. 
+
+So NEXT STEPS:
+ 
+1) Figure out whether the exec-plugin actually NEEDS me to specify a phase...
+2) Start looking at the maven surefire and maven failsafe plugins - what is the difference between these and the exec one...?
+When should i use one and not the other? What is a tester more likely to use?
+
+Interesting...look at the ordering of the maven plugins during my mvn clean install above...
+
+I have added the maven-compiler-plugin in my pom.xml because if i don't, the source and target = 1.5
+(https://maven.apache.org/plugins/maven-compiler-plugin/)
+
+![Maven default plugin lifecycle Snippet](readme_images/maven_default_plugin_lifecycle.png)
+
 
 
 
