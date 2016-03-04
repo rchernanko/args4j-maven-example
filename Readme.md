@@ -171,7 +171,8 @@ I have added the maven-compiler-plugin in my pom.xml because if i don't, the sou
 
 ![Maven default plugin lifecycle Snippet](readme_images/maven_default_plugin_lifecycle.png)
 
-
+3) Understand Maven profiles in more detail too:
+http://www.tutorialspoint.com/maven/maven_build_profiles.htm
 
 
 ###Websites I've used so far:
